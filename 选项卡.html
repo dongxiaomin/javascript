@@ -1,0 +1,105 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>选项卡</title>
+ </head>
+ <style>
+   .navbar{
+   	width: 1200px;
+   	height: 40px;
+   	margin: 20px auto;
+   	background: #E4E4E4;
+   	position: relative;
+   }
+   .navbar a{
+   	display: block;
+   	color:#1F1F1F;
+   	text-decoration:none;
+   }
+   .navbar a:hover{
+   	color:#0085D0;
+    background: #F6F6F6;
+   }
+   .navindex{
+   	width: 159px;
+   	height: 40px;
+   	border-top: 2px solid #0085d0;
+   	border-right:1px solid #fff;
+   	font-size: 16px;
+   	float:left;
+   	padding:0;
+    margin:0;
+    list-style: none;
+    line-height: 40px;
+    text-align: center;
+   }
+   .dropdown{
+   	width: 259px;
+   	height: 40px;
+   	border-right:1px solid #fff;
+   	font-size: 16px;
+   	float: left;
+    padding:0;
+    margin:0;
+    list-style: none;
+    line-height: 40px; 
+    text-align: center;  	
+   }
+   .downMenu{
+   	width: 1200px;
+   	height: 40px;
+   	line-height: 40px;
+   	left:0; 
+   	/*background: #ccc;*/
+   	box-shadow: 0 0 1px #ccc;
+   	z-index:222;
+   	margin: 0 auto;
+   	position: absolute;
+   }
+ </style>
+ <body>
+ 	<div class="navbar">
+ 		<li class="navindex"><a href="#">首页</a></li>
+ 		<li class="dropdown">
+ 			<a href="#">移动商场</a>
+ 			<div class="downMenu">11111</div>
+ 		</li>
+ 		<li class="dropdown">
+ 			<a href="#">我的移动</a>
+ 			<div class="downMenu">22222</div>
+ 		</li>
+        <li class="dropdown">
+        	<a href="#">网上营业厅</a>
+ 			<div class="downMenu">33333</div>
+        </li>
+        <li class="dropdown">
+        	<a href="#">服务与支持</a>
+ 			<div class="downMenu">44444</div>
+        </li>
+ 	</div>
+ </body>
+ <script>
+   window.onload=function(){
+   var downMenu=document.getElementsByClassName("downMenu");
+   var navbar=document.getElementsByClassName("navbar");
+   var lis=document.getElementsByClassName("dropdown");
+   
+   for(var i=0;i<lis.length;i++){
+     lis[i].index=i;
+     lis[i].onmouseover=function(){
+         for(var j=0;j<navbar.length;j++){
+            downMenu[j].style.display="none";
+         }
+            downMenu[this.index].style.display="block";
+     }
+     lis[i].onmouseout=function(){
+         for(var j=0;j<lis.length;j++){
+             downMenu[j].style.display="none";
+         }
+     }
+   }
+}
+
+ </script>
+ </html>
