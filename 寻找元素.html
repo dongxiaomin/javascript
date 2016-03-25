@@ -1,0 +1,89 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>寻找元素</title>
+ </head>
+ <style>
+.box{
+     width: 300px;
+     height: 300px;
+     border:1px solid black;
+     /*margin:30px auto;*/
+     position: relative;
+}
+ .xiao{
+ 	width: 50px;
+ 	height: 50px;
+ 	border:1px solid black;
+ 	position: absolute;
+ }
+  #span{
+ 	width: 50px;
+ 	height: 50px;
+ 	border:1px solid black;
+ 	position: absolute;
+ }
+ ul{
+ 	cursor: pointer;
+ }
+ </style>
+ <body>
+ 	<div class ="box"></div>
+ 	<ul>
+      <li dash-a="id">通过id来选择</li>
+      <li dash-a="tag">通过getElementByTagName来选择</li>
+      <li dash-a="pas">通过querySelectorAll来选择</li>
+      <li dash-a="qs">通过querySelector来选择</li>
+      <li dash-a="cl"> 通过className来选择</li>
+ 	</ul>
+ </body>
+ <script>
+     var box=document.querySelector(".box");
+     var ram=Math.floor(Math.random()*10);
+     var el;
+     var el=document.createElement("div");
+     var drop=function(){
+     	for(var i=0;i<10;i++){
+     		if(i===ram){
+     		var	el=document.createElement("span");
+     		el.id="span";
+     	   }else{
+     	   	var	el=document.createElement("div");
+     		el.className="div";
+     	   }
+           box.appendChild(el);
+           el.className="xiao";
+           el.style.left=Math.floor(Math.random()*(box.offsetWidth-el.offsetWidth))+"px";
+           el.style.top=Math.floor(Math.random()*(box.offsetHeight-el.offsetHeight))+"px";
+     	}
+     
+    }
+    drop();
+        var els=box.nextElementSibling.children;
+        var a;
+     
+        for(var i=0;i<els.length;i++){
+         els[i].onclick=function(){
+         	var type=this.getAttribute("dash-a");
+         	if(type==="id"){
+         	   a=document.getElementById("span");
+         	}else if(type="tag"){
+               a=document.getElementsByTagName("span")[0];
+         	}else if(type="pas"){
+               a=document.querySelectorAll("span")[0];
+         	}else if(type="pa"){
+               a=document.querySelector(".span");
+         	}else if(type="cn"){
+               a=document.getElementsByClassName(".span")[0];
+         	}
+             a.style.background="red";
+             setTimeout(function(){
+             	a.style.background="none";
+                box.innerHTML="";
+                drop();
+             },300)
+         }
+        }
+ </script>
+ </html>

@@ -99,20 +99,41 @@ dom对象   dom集合
 
 ### 选取元素
 ```javascript
-* var el=document.getElementById()
-* var el=document.getElementsClassName()
-* var el=document.getElementsByTagName()
-* var el=document.getElementsByName()
+* var el=document.getElementById();           //对象
+* var el=document.querySelector();           //ie8   
 
+* var el=document.getElementsByClassName();      //集合
+* var el=document.getElementsByName();
+* var el=document.getElementsByTagName();
+* var el=document.querySelectorAll();        //ie8
 ```
 
 ### 筛选元素
 
+>从一个dom对象开始，根据逻辑关系再去寻找dom对象
+>父元素
+* el.parentNode
+* el.parentElement
+
+
+>子元素
+* el.firstChild;
+* el.firstElementChild;
+
+* el.lastChild;  
+
+>兄弟元素
 * el.nextSibling;
+* el.nextElementSibling;
+
+* el.previous
 * el.previousSibling;
+
 ### 操作样式
-* el.style.color='red';
-* el.style.size=1;
+* el.style(设置行内样式的值)
+   * el.style.color='red';      
+   * el.style.size=1;
+
 ### 获取位置信息
 * el.style.screenX
 * el.style.screenY
@@ -120,25 +141,74 @@ dom对象   dom集合
 *  offsetLeft        //x轴
 *  
 
-### 操作属性
-* el.currentStyle.width            //ie
-* getComputerStyle(el,null).width  //FF
 
-### 操作节点
-* document.createElement（元素标签名）
-* el.parentNode;
-* el.childNodes;
-* el.firstChild;
-* el.lastChild;
+###获取元素信息        (HTMLELEMENT)
+* el.offsetWidth
+* el.offsetHeight
+* el.offsetLeft
+* el.offsetsetTop
+* el.offsetParent              //具有定位属性的父元素
+* el.getBoundingClietRect()    //方法  
+
+计算元素距离浏览器窗口位置
+* el.innerHTML                 //可读可写
+* getComputedStyle(el,null).width   //100px
+
+### 操作属性           (ELEMENT)
+<div class="a" id="1"></div>
+* el.setAttribute();
+* el.getAttribute();
+* el.removeAttribute();
+* el.hasAttribute();
+* el.className;
+* el.id;
+* el.classList;
+
+### 操作节点  (Node)
+* el.appendChild;      //dom对象
+* el.removeChild;
+* el.insertBefore;      //dom
+* el.cloneNode;
+* el.replaceChild;
 
 
-* var el=document.documentElement
 
 
 
 ### 其他
 
 
+按照我们正常的编程思路
+第一步找出元素
+我们从document对象开始，利用这身上的方法
+找出我们需要的元素（dom元素 或 dom集合）
 
 
 
+
+
+dom对象
+js会用一个很大的对象来代表页面中我们看到的那个元素
+
+dom集合
+在一个类数组对象中存储很多dom对象构成一个集合
+
+var domobj={
+  0:domobj;
+  0:domobj;
+  0:domobj;
+  length:3,
+  _proto_:Object;{
+      
+}
+
+}
+
+
+//set必须传一个值x。
+var obj={
+  a:1,
+  b:2,
+  set c (x){console.log(111);},
+  get d (){return 5;}
+}
