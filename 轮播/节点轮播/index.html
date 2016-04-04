@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="./js/function.js"></script>
+	<script src="./js/animate.js"></script>
+	<title>节点轮播</title>
+</head>
+<style >
+	.nodebanner{
+		width: 1000px;
+		height:110px ;
+		position: relative;
+		overflow: hidden;
+		border:3px solid red;
+		margin: 50px auto;
+	}
+	.nodebox{
+		width: 1175px;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top:0;
+		z-index: -1;
+	}
+	.nodebox a{
+		width: 235px;
+		height: 110px;
+	/*	display: block;*/
+		float: left;
+		font-size:0;
+	}
+	.btn{
+		position: absolute;
+		width: 100%;
+		height:40px;
+		top:50%;
+		margin-top: -20px;
+		z-index: 20;
+		cursor: pointer;
+	}
+	.btnL{
+		width: 20px;
+		height: 40px;
+		font-size: 20px;
+		font-weight:bold;
+		color:black;
+		float: left;
+		line-height: 40px;
+		text-align: center;
+		background: #ccc;
+		opacity: 0.9;
+		display: none;
+	}
+	.btnR{
+		width: 20px;
+		height: 40px;
+		font-size: 20px;
+		font-weight:bold;
+		color:black;
+		float: right;
+		line-height: 40px;
+		text-align: center;
+		background: #ccc;
+		opacity: 0.9;
+		display: none;
+	}
+</style>
+<body>
+	<div class="nodebanner">
+	  <div class="nodebox">
+		<a href="#" ><img src="./image/banner1.jpg"></a>
+		<a href="#" ><img src="./image/banner2.jpg"></a>
+		<a href="#" ><img src="./image/banner3.jpg"></a>
+		<a href="#" ><img src="./image/banner4.jpg"></a>
+		<a href="#" ><img src="./image/banner5.jpg"></a>
+     </div>		
+		<div class="btn">
+			<div class="btnL">&lt;</div>
+			<div class="btnR">&gt;</div>
+		</div>
+	</div>
+</body>
+<script>
+window.onload=function(){
+	var win=document.getElementsByClassName("nodebanner")[0];	
+	var box=document.getElementsByClassName("nodebox")[0];
+	console.log(box)
+	var btnL=document.getElementsByClassName("btnL")[0];
+	var btnR=document.getElementsByClassName("btnR")[0];
+	var as=$("a",box);
+	var len=as.length;
+	var aW=parseInt(getStyle(as[0],"width"));
+	var flag=true;
+	var t;
+	t=setInterval(move,1000)
+
+	box.style.width=aW*len+"px";   //用来存放图片
+
+
+	win.onmouseover=function(){
+		clearInterval(t);
+		btnL.style.display="block";
+		btnR.style.display="block"
+	}
+	win.onmouseout=function(){
+		t=setInterval(move,1000)
+		btnL.style.display="none";
+		btnR.style.display="none"
+	}
+	btnL.onclick=function(){
+		move();
+	}
+	btnR.onclick=function(){
+		moveR();
+	}
+//移动 动画
+	 function move(){
+	 	if(!flag){
+	 		return;
+	 	}
+	 	flag=false;
+	 	//box 在window中  通过控制定位的left值控制 大小 位置
+	 	animate(box,{left:-aW},function(){
+	 		var first=getFirst(box);//获取盒子box中的第一个元素即图片
+	 		box.style.left=0+"px"   //first走后，第二张会代替它的位置，所以将box拉回到left=0px;
+	 		box.appendChild(first);//将第一个元素  放到box 的最后
+	 		flag=true;
+	 	})
+	 }
+    
+
+    function moveR(){
+    	if(!flag){
+    		return;
+    	}
+    	flag=false;
+    	var first=getFirst(box);
+    	var last=getLast(box);
+    	box.style.left=-aW+"px";
+    	box.insertBefore(last,first);
+    	animate(box,{left:0},function(){
+    		flag=true;
+    	})
+    }
+
+}
+</script>
+</html>

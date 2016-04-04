@@ -117,10 +117,12 @@ dom对象   dom集合
 
 
 >子元素
+* el.children
 * el.firstChild;
 * el.firstElementChild;
 
 * el.lastChild;  
+* el.lastElementChild;
 
 >兄弟元素
 * el.nextSibling;
